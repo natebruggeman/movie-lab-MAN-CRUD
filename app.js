@@ -2,6 +2,9 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const connectionString = 'mongodb://localhost/new';
+const methodOverride = require('method-override')
+const bodyParser = require('body-parser');
+
 
 mongoose.connect(connectionString, { useNewUrlParser: true,
                                      useUnifiedTopology: true,
@@ -14,6 +17,8 @@ mongoose.connection.on('connected', () => {
   console.log(`Mongoose connected to ${connectionString}`);
 });
 
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(methodOverride('_method'));
 
 
 // new route
@@ -24,7 +29,14 @@ app.get('/new', (req, res) => {
 
 // create route
 app.post('/', (req, res) => {
-
+	Movie.create(req.body, (err, createdMovie) => {
+		if (err){
+			console.log(err);
+		} else {
+			console.log(createdMovie);
+			res.redirect('/new')
+		}
+	})
 })
 
 
