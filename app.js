@@ -28,7 +28,13 @@ app.post('/', (req, res) => {
 })
 
 
+//schema
+const movieSchema = new mongoose.Schema({
+	title: String,
+	genre: String,
+})
 
+const Movie = mongoose.model('Movie', movieSchema);
 
 
 
