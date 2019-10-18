@@ -20,6 +20,13 @@ mongoose.connection.on('connected', () => {
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(methodOverride('_method'));
 
+//schema
+const movieSchema = new mongoose.Schema({
+	title: String,
+	genre: String,
+})
+
+const Movie = mongoose.model('Movie', movieSchema);
 
 // new route
 app.get('/new', (req, res) => {
@@ -39,15 +46,22 @@ app.post('/', (req, res) => {
 	})
 })
 
-
-//schema
-const movieSchema = new mongoose.Schema({
-	title: String,
-	genre: String,
+//index show route
+app.get('/', (req, res) => {
+	Movie.find({}, (err, foundMovies) => {
+		if (err){
+			res.send(err);
+		} else {
+			console.log(foundMovies);
+			res.render(
+				'index.ejs', 
+				{
+					movies: foundMovies	
+				}
+			)
+		}		
+	})
 })
-
-const Movie = mongoose.model('Movie', movieSchema);
-
 
 
 
