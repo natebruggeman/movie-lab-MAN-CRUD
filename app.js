@@ -58,6 +58,16 @@ app.get('/', (req, res) => {
 	})
 })
 
+app.get('/:id', (req, res) => {
+	Movie.findById(req.params.id, (err, foundMovie) => {
+		if (err){
+			res.send(err);
+		} else {
+			res.render('show.ejs', {movie: foundMovie})
+		}
+	})
+})
+
 
 
 
