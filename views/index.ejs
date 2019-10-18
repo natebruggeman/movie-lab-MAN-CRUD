@@ -9,7 +9,9 @@
 	<ul>
 		<% for (let i = 0; i < movies.length; i++) {%>
 		<li>
-			<%= movies[i].title;%>
+			<a href="/<%=movies[i].id%>">
+				<%= movies[i].title;%>
+			</a>
 			<%= movies[i].genre;%>
 
 		</li>
