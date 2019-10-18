@@ -41,7 +41,7 @@ app.post('/', (req, res) => {
 			console.log(err);
 		} else {
 			console.log(createdMovie);
-			res.redirect('/new')
+			res.redirect('/')
 		}
 	})
 })
@@ -53,12 +53,7 @@ app.get('/', (req, res) => {
 			res.send(err);
 		} else {
 			console.log(foundMovies);
-			res.render(
-				'index.ejs', 
-				{
-					movies: foundMovies	
-				}
-			)
+			res.render('index.ejs', {movies: foundMovies})
 		}		
 	})
 })
