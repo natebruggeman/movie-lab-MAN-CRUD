@@ -12,8 +12,7 @@ app.get('/new', (req, res) => {
 
 // create route
 app.post('/', (req, res) => {
-	console.log('this is the create route');
-	
+
 })
 
 
